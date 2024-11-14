@@ -63,6 +63,17 @@ SENSORS = {
         "unit_of_measurement": "CNY/m³",
         "device_class": SensorDeviceClass.WATER,
     },
+    "total_amount": {
+        "name": "当前水费总价",
+        "icon": "hass:currency-cny",
+        "unit_of_measurement": "CNY",
+        "device_class": SensorDeviceClass.WATER,
+    },
+    "last_period": {
+        "name": "当前周期",
+        "icon": "hass:calendar-month",
+        "attributes": ["last_update"],
+    }
 }
 
 
@@ -103,12 +114,12 @@ async def async_setup_entry(
                         sensors_list.append(BJWaterSensor(coordinator, user_code, key, v, k))
             else:
                 sensors_list.append(BJWaterSensor(coordinator, user_code, key, value))
-        elif key == "cycle":
-            dict_data = value
-            for k, v in dict_data.items():
-                index = v["index"]
-                sensors_list.append(BJWaterHistoryFeeSensor(coordinator, user_code, k, v["fee"], index))
-                sensors_list.append(BJWaterHistoryUsageSensor(coordinator, user_code, k, v["meter"], index))
+        # elif key == "cycle":
+        #     dict_data = value
+        #     for k, v in dict_data.items():
+        #         index = v["index"]
+        #         sensors_list.append(BJWaterHistoryFeeSensor(coordinator, user_code, k, v["fee"], index))
+        #         sensors_list.append(BJWaterHistoryUsageSensor(coordinator, user_code, k, v["meter"], index))
     async_add_entities(sensors_list, False)
 
 
