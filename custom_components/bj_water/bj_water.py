@@ -134,8 +134,9 @@ class BJWater:
             self.info.update({"water_tax": float(detail_data["taxFee"]["price"])})  # 水资源费
             self.info.update({"second_step_left": int(detail_data["stepLeft"]["second"])})  # 记录第二阶梯剩余使用量
             self.info.update({"total_cost": self.info["water_tax"] + self.info["first_step_price"] + self.info["wastwater_treatment_price"]})
-            self.info.update({"total_amount": detail_data["amount"]})
             self.info.update({"last_period": bill_cycle})
+            self.info.update({"last_period_usage": detail_data["total"]})
+            self.info.update({"last_period_cost": detail_data["amount"]})
         else:
             LOGGER.error("get_monthly_bill res state code: %s" % (response.status))
             raise InvalidData(f"get_monthly_bill response status_code = {response.status}")

@@ -63,8 +63,14 @@ SENSORS = {
         "unit_of_measurement": "CNY/m³",
         "device_class": SensorDeviceClass.WATER,
     },
-    "total_amount": {
-        "name": "当前水费总价",
+    "last_period_usage": {
+        "name": "当期用水量",
+        "icon": "hass:water-circle",
+        "unit_of_measurement": "m³",
+        "device_class": SensorDeviceClass.WATER,
+    },
+    "last_period_cost": {
+        "name": "当期水费",
         "icon": "hass:currency-cny",
         "unit_of_measurement": "CNY",
         "device_class": SensorDeviceClass.WATER,
@@ -72,7 +78,8 @@ SENSORS = {
     "last_period": {
         "name": "当前周期",
         "icon": "hass:calendar-month",
-        "attributes": ["last_update"],
+        "unit_of_measurement": "月",
+        "device_class": SensorDeviceClass.DATE,
     }
 }
 
